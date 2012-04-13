@@ -1,0 +1,8 @@
+#parameters:
+#    simple_catalog.example.class: HotDesign\SimpleCatalogBundle\Example
+
+services:
+    validator_image_limit_number:
+        class: HotDesign\SimpleCatalogBundle\Validator\ImageAttachmentLimitConstraintValidator
+        tags:
+            - { name: validator.constraint_validator, alias: image_attachment_limit_constraint_validator }

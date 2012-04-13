@@ -1,0 +1,22 @@
+AdminDashboard:
+    pattern: /
+    defaults: { _controller: SimpleCatalogBundle:BaseEntity:index }
+    
+AdminCategory:
+    resource: "@SimpleCatalogBundle/Resources/config/routing/category.yml"
+    prefix:   /category
+    
+    
+AdminPic:
+    resource: "@SimpleCatalogBundle/Resources/config/routing/pic.yml"
+    prefix:   /pic
+    
+    
+AdminBaseEntity:
+    resource: "@SimpleCatalogBundle/Resources/config/routing/baseentity.yml"
+    prefix:   /baseentity
+    
+    
+_imagine:
+    resource: .
+    type:     imagine

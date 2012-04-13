@@ -1,0 +1,31 @@
+pic_new:
+    pattern:  /{id_baseentity}/new
+    defaults: { _controller: "SimpleCatalogBundle:Pic:new" }
+
+pic_create:
+    pattern:  /{id_baseentity}/create
+    defaults: { _controller: "SimpleCatalogBundle:Pic:create" }
+    requirements: { _method: post }
+
+pic_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SimpleCatalogBundle:Pic:edit" }
+
+pic_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SimpleCatalogBundle:Pic:update" }
+    requirements: { _method: post }
+
+pic_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SimpleCatalogBundle:Pic:delete" }
+    requirements: { _method: post }
+
+pic_gallery:
+    pattern:  /{id_baseentity}/pic_gallery
+    defaults: { _controller: "SimpleCatalogBundle:Pic:gallery" }
+
+
+pic_setdefaultpic:
+    pattern:  /{pic_id}/set_default
+    defaults: { _controller: "SimpleCatalogBundle:Pic:setdefaultpic" }

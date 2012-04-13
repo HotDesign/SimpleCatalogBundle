@@ -1,0 +1,49 @@
+{% extends 'SimpleCatalogBundle:Layouts:baseext.html.twig' %}
+{% block title %} Lista de Imágenes{% endblock %}
+
+{% block content %}
+
+<div class="form-actionss well">
+    <h2>{{ block('title') }}</h2>
+    <div class="scright">
+        <a href="{{ path('pic_new', { 'id_baseentity': baseentity.id } ) }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nueva Imágen</a>
+    </div>
+    <div style="clear: both"></div>
+</div>
+
+{% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
+
+<table class="table table-striped ">
+    <thead>
+        <tr>
+            <th class="sc_index_table">#</th>
+            <th class="sc_thumb_table">Thumb</th>
+            <th>Título</th>
+            <th class="sc_actions_table">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                <div class="pic_picture">   
+                     <a href="{{ asset(entity.getPath) }}" rel="prettyPhoto" title="{{ entity.title }}">
+                        {% if entity.getIsDefault %}<div id="pic_default" title="Esta imágen es la principal de la Galería"></div>{% endif %}
+                        <img src="{{ (entity.getPath) | apply_filter('my_thumb') }}" alt="{{ entity.title }}" />
+                    </a>
+                </div>
+                   
+                </td>
+                <td>{{ entity.title }}</td>
+                <td>
+                    <a class="btn btn-mini" href="{{ path('pic_edit', { 'id': entity.id }) }}">Editar</a>
+                    {% if not entity.getIsDefault %}
+                        <a class="btn btn-mini" href="{{ path('pic_setdefaultpic', { 'pic_id': entity.id }) }}">Hacer Principal<i class="icon-star"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

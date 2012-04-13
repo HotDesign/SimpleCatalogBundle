@@ -1,0 +1,67 @@
+body {
+    padding-top: 60px;
+    padding-bottom: 40px;
+}
+div#form {
+    display: inline;
+}
+
+label.required {
+    font-weight: bold;
+}
+
+.sc_actions {
+    text-align: center;
+    margin-top: 40px;
+
+}
+
+.sc_actions a {
+    margin-bottom: 10px;
+}
+
+.sc_thumb_table {
+    width: 180px;
+}
+
+.sc_actions_table {
+    width: 100px;
+}
+
+.sc_index_table {
+    width: 10px;
+}
+
+.sc_form {
+    margin-top: 20px;
+
+}
+.scright {
+    float: right;
+    font-size: 12px;
+}
+
+.well h2 { width: auto; float: left; }
+
+.default_img {
+    border: 1px dotted #93A1A1;
+}
+
+.pic_picture {
+    float: left;
+    padding: 10px;
+    height: auto;
+    margin: 5px 0;
+    background: none;
+
+}
+#pic_default {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background: url(../img/pic_default.png) no-repeat;
+}
+
+.backendItemsListing .pagination {
+    float: right;
+}
