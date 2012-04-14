@@ -81,7 +81,8 @@ class Pic {
 
     protected function getUploadRootDir() {
         // the absolute directory path where uploaded documents should be saved
-        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+        // 6 Saltos para arriba y estaremos en el root :D 
+        return dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))). '/web/' . $this->getUploadDir();
     }
 
     protected function getUploadDir() {
