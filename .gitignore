@@ -1,0 +1,14 @@
+#Ignoramos los archivos terminados en pelito que son los temporales de
+algunos Editores como Kate y Gedit
+*~
+
+# archivos creados por los IDEs Eclipse, Zend Studio, Netbeans y PHPStorm
+.buildpath
+.project
+.settings
+nbproject
+.idea
+
+#Ingoramos la config
+Config/MyConfig.php
+
