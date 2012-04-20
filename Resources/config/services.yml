@@ -6,3 +6,8 @@ services:
         class: HotDesign\SimpleCatalogBundle\Validator\ImageAttachmentLimitConstraintValidator
         tags:
             - { name: validator.constraint_validator, alias: image_attachment_limit_constraint_validator }
+
+
+    item.service:
+        class:      HotDesign\SimpleCatalogBundle\Services\ItemService
+        arguments:  [@doctrine.orm.entity_manager]
