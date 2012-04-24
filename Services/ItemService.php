@@ -54,7 +54,7 @@ class ItemService {
 	}
 
 	public function getHomeFeatured($limit) {
-		$query = 'SELECT c FROM \HotDesign\SimpleCatalogBundle\Entity\BaseEntity c WHERE c.enabled AND c.important_general = 1';
+		$query = 'SELECT c FROM \HotDesign\SimpleCatalogBundle\Entity\BaseEntity c WHERE c.enabled = 1 AND c.important_general = 1';
 		$query = $this->em->createQuery($query)->setMaxResults($limit);
 
 		$items = $query->getResult();
