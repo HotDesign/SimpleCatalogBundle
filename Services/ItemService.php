@@ -32,6 +32,18 @@ class ItemService {
 		$this->em = $em;
 	}
 
+	/*
+	* Esta funcion se encarga de dado un id de BaseEntity
+	* Busca todas las instancias de extension y las devuelve en un array
+	* de la forma:
+	*	$extends['NombreClase'] = array(
+				'class' => NombreClase,
+				'bundle_name' => NombreBundle,
+				'object' => (Instancia al objeto extension)
+			)
+	*/
+
+
 	public function getExtensions($item_id, $category_type) {
 
         //Obtenemos el array de las clases que extiende
@@ -53,20 +65,56 @@ class ItemService {
         return $extends;
 	}
 
+
+	/*
+	*	Dado un item_id : Buscamos y devolvemos TODAS sus pics.
+	*/
+	public function getItemPics($item_id) {
+		   return $this->em->getRepository('SimpleCatalogBundle:Pic')
+		   ->findBy(array('entity' => $item_id));
+	}
+
+
+	/*
+	*	Funcion que devuelve los items que esten activos y que esten destacados
+	*	en la página principal.... Con limite. Los devuelve CON EXTENSIONS.
+	*/
 	public function getHomeFeatured($limit) {
 		$query = 'SELECT c FROM \HotDesign\SimpleCatalogBundle\Entity\BaseEntity c WHERE c.enabled = 1 AND c.important_general = 1';
 		$query = $this->em->createQuery($query)->setMaxResults($limit);
 
 		$items = $query->getResult();
 
-		$areturn = array();
+		$out = array();
 		foreach ($items as $item) {
+			//Obtengo las extensiones
 			$extends = $this->getExtensions($item->getId(), $item->getCategory()->getType() );
-			$areturn[] = array('BaseEntity' => $item, 'extends' => $extends);
+			$out[] = array(
+					'BaseEntity' => $item, //Aqui viaja el objeto BaseEntity (Info genérica)
+					'extends' => $extends //Aqui viaja el array de objetos extension.
+					);
 		}
-
-		return $areturn;
+		return $out;
 	}
+
+	/*
+	*	Funcion utilizada en Detalle. Dado un id devuelve la BaseEntity 
+	*	y sus respectivas extensiones.
+	*/
+	public function getFullItem($item_slug) {
+        $repo = $this->em->getRepository('SimpleCatalogBundle:BaseEntity');
+        $entity = $repo->findOneBySlug($item_slug);
+       
+        if (!$entity || !$entity->getEnabled()) {
+        	return false;
+        }
+
+		$out['BaseEntity'] = $entity;
+		$out['pics'] = $this->getItemPics($entity->getId());
+		$out['extends'] = $this->getExtensions($entity->getId(), $entity->getCategory()->getType() );
+		return $out;
+	}
+
 
 	//Ejemplos de metodos que se podrian crear: 
 	public function getBasicItemListing($category, $count) {  }
@@ -84,15 +132,5 @@ class ItemService {
 		print_r($query->getArrayResult());
 		die;
 	}	
-
-	/**
-	*	Devuelve la información completa de un producto
-	*/
-	public function getFullItem($id) {
-		return 'This is a full Item';
-		//Aqui programar logica de extensions.
-	}
-
-
 
 }
