@@ -61,6 +61,8 @@ class ItemService {
                      ->findOneBy(array('base_entity' => $item_id )
              );
             $extends[$e['class']] = $e;
+
+
         }
         return $extends;
 	}
@@ -112,25 +114,45 @@ class ItemService {
 		$out['BaseEntity'] = $entity;
 		$out['pics'] = $this->getItemPics($entity->getId());
 		$out['extends'] = $this->getExtensions($entity->getId(), $entity->getCategory()->getType() );
+
 		return $out;
 	}
 
 
-	//Ejemplos de metodos que se podrian crear: 
-	public function getBasicItemListing($category, $count) {  }
-	public function getFullItemListing($category, $max_per_page) {}
-	public function getBasicItemListingblabla($category, $max_per_page) {}
+	public function getFullListing($category_id = NULL, $current_page) {
+		$repo = $this->em->getRepository('SimpleCatalogBundle:BaseEntity');
 
-	/**
-	*	Devuelve la información básica de un Item (Sin Extensiones)
-	*/
-	public function getBasicItem($id) {
-		$query = 'SELECT c FROM \HotDesign\SimpleCatalogBundle\Entity\BaseEntity c WHERE c.id = ' . $id;
-		$query = $this->em->createQuery($query);
+		$query = $repo->createQueryBuilder('p')->orderBy('p.created_at', 'DESC');
 
-		echo '<pre>';
-		print_r($query->getArrayResult());
-		die;
-	}	
+		if ($category_id) {
+			$query->where("p.category = $category_id");
+		}
 
+        if ($current_page == 0) {
+            $max_items_per_page = 9999999;
+        } else {
+            $max_items_per_page = MyConfig::$items_per_pages; //Default items per page 
+        }
+
+         //Build an adapter for pagerfanta, so he can paginate
+        $adapter = new DoctrineORMAdapter($query);
+        $pagerfanta = new Pagerfanta($adapter);
+
+        //Set options to pagerfanta
+        $pagerfanta->setMaxPerPage($max_items_per_page);
+        $pagerfanta->setCurrentPage($current_page);
+
+        //Get the items filtered by the pager limit
+        $entities = $pagerfanta->getCurrentPageResults();
+
+        $output = array();
+        foreach ($entities as $entity ) {
+        	$output[] = $this->getFullItem($entity->getSlug() );        
+        }
+        $entities = $output;
+
+        $num_pages = $pagerfanta->getNbPages(); //get the pages result, this is used in the template to hide/show the paginator
+		
+		return compact('entities', 'num_pages', 'pagerfanta');
+	}
 }
