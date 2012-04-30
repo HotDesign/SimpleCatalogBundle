@@ -23,6 +23,7 @@
             {{ form_widget(edit_form) }}
                 <div class="form-actions">
                     <input type="submit" class="btn btn-primary" value="Guardar">
+                     <a href="{{ url('product_profile', {'slug': entity.slug, 'category_slug': entity.category.slug}) }}" target="_blank" class="btn btn-success">Visualizar</a>
                     <button type="button" class="btn btn-danger" onclick="javascript:delete_form(this)">Borrar</button>
                 </div>
             </form>
