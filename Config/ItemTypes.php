@@ -27,14 +27,6 @@ class ItemTypes {
     );
     //Array ( NOMBRE , CLASE EXTENDS )
     private static $types = array(
-        self::AUTOMOBILES => array(
-            'label' => 'Rodados',
-            'class_extends' => array('ScGeoExt')
-        ),
-        self::BASE => array(
-            'label' => 'Items',
-            'class_extends' => array('ScGeoExt')
-        ),
         self::HOUSING => array(
             'label' => 'Inmuebles',
             'class_extends' => array('ScGeoExt', 'ScHousingExt')
