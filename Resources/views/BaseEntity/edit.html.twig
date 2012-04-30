@@ -52,6 +52,7 @@
                     Aún no se han cargado imágenes.
                 </div>
         {% endfor %}
+        <div class="clearfix"></div>
         {% for ext in extends %}
             {% include ext.bundle_name ~ ':' ~ ext.class ~ ':show_backend.html.twig' with {'entity': ext.object } %}
         {% endfor %}
