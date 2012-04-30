@@ -119,7 +119,9 @@ class ItemService {
     public function getFullListing($category_id = NULL, $current_page) {
         $repo = $this->em->getRepository('SimpleCatalogBundle:BaseEntity');
 
-        $query = $repo->createQueryBuilder('p')->orderBy('p.created_at', 'DESC');
+        $query = $repo->createQueryBuilder('p')
+          ->addOrderBy('p.important_category', 'DESC')
+          ->addOrderBy('p.created_at', 'DESC');
 
         if ($category_id) {
             $query->where("p.category = $category_id");
