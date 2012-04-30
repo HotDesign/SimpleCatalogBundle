@@ -33,3 +33,17 @@ $(function() {
         }).width(800 - horizontalPadding).height(400 - verticalPadding);
     });    
 }); 
+
+/* Ocultar el precio cuando esta desactivado */
+
+$('#hotdesign_simplecatalogbundle_baseentitytype_is_billable').change(function() { hidePrice();  });
+function hidePrice() {
+    if ( $('#hotdesign_simplecatalogbundle_baseentitytype_is_billable').is(':checked') ) {
+        $("#hotdesign_simplecatalogbundle_baseentitytype_price").parent().parent().show();            
+        $("#hotdesign_simplecatalogbundle_baseentitytype_currency").parent().parent().show();
+    } else {
+        $("#hotdesign_simplecatalogbundle_baseentitytype_price").parent().parent().hide();            
+        $("#hotdesign_simplecatalogbundle_baseentitytype_currency").parent().parent().hide();                
+    } 
+}
+hidePrice();
