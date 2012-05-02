@@ -273,6 +273,29 @@ class BaseEntity {
     public function getDescription() {
         return $this->description;
     }
+    
+    
+    public function getExcerpt($length = 200, $trailing = '...') {
+        
+        $str = $this->description;
+        
+        if ($str) {
+            $str = trim($str);
+            $str = strip_tags($str);
+        }
+        
+        $length -= mb_strlen($trailing);
+        
+        if (mb_strlen($str) > $length) {
+            // string exceeded length, truncate and add trailing dots
+            return mb_substr($str, 0, $length) . $trailing;
+        } else {
+            // string was already short enough, return the string
+            $res = $str;
+        }
+
+        return $res;
+    }
 
     /**
      * Set currency
