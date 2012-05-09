@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints\Image;
 
 //MyConfig
-use HotDesign\SimpleCatalogBundle\Config\MyConfig;
+use ConfigClasses\MyConfig;
 
 /**
  * HotDesign\SimpleCatalogBundle\Entity\Pic

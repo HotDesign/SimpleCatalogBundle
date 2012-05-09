@@ -6,8 +6,9 @@ use Doctrine\ORM\EntityManager;
 use Pagerfanta\Pagerfanta,
     Pagerfanta\Adapter\DoctrineORMAdapter,
     Pagerfanta\Exception\NotValidCurrentPageException;
-use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
-use HotDesign\SimpleCatalogBundle\Config\MyConfig;
+
+use ConfigClasses\ItemTypes;
+use ConfigClasses\MyConfig;
 
 use HotDesign\SimpleCatalogBundle\Entity\BaseEntity;
 

@@ -2,7 +2,7 @@
 
 namespace HotDesign\SimpleCatalogBundle\Validator;
 
-use HotDesign\SimpleCatalogBundle\Config\MyConfig;
+use ConfigClasses\MyConfig;
 
 use Symfony\Component\Validator\Constraint;
 

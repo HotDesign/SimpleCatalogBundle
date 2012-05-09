@@ -7,9 +7,9 @@ use HotDesign\SimpleCatalogBundle\Entity\BaseEntity;
 use HotDesign\SimpleCatalogBundle\Form\BaseEntityType;
 //Configs
 use HotDesign\SimpleCatalogBundle\Config\Currencies;
-use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
+use ConfigClasses\ItemTypes;
 
-use HotDesign\SimpleCatalogBundle\Config\MyConfig;
+use ConfigClasses\MyConfig;
 
 use Pagerfanta\Pagerfanta,
     Pagerfanta\Adapter\DoctrineORMAdapter,

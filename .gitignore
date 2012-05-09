@@ -9,6 +9,3 @@ algunos Editores como Kate y Gedit
 nbproject
 .idea
 
-#Ingoramos la config
-Config/MyConfig.php
-Config/ItemTypes.php

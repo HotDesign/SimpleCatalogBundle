@@ -5,7 +5,7 @@ namespace HotDesign\SimpleCatalogBundle\Validator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-use HotDesign\SimpleCatalogBundle\Config\MyConfig;
+use ConfigClasses\MyConfig;
 
 class ImageAttachmentLimitConstraintValidator extends ConstraintValidator
 {
