@@ -138,12 +138,14 @@ class Pic {
     */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        //* @Assert\Image(maxSize="6000000", mimeTypesMessage="El tipo de archivo no es una imágen.")
-        $image = new Image();
-        $image->maxSize = MyConfig::$image_max_size_bytes;
-        $image->mimeTypesMessage = 'La imágen seleccionada no es de un tipo válido.';
+        if (!MyConfig::$shared_hosting) {
+            //* @Assert\Image(maxSize="6000000", mimeTypesMessage="El tipo de archivo no es una imágen.")
+            $image = new Image();
+            $image->maxSize = MyConfig::$image_max_size_bytes;
+            $image->mimeTypesMessage = 'La imágen seleccionada no es de un tipo válido.';
 
-        $metadata->addPropertyConstraint('file', $image );
+            $metadata->addPropertyConstraint('file', $image );
+        }
     }
     /**
      * INICIO DE METODOS AUTOGENERADOS  
