@@ -4,7 +4,7 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
+use ConfigClasses\ItemTypes;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
