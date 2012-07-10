@@ -9,6 +9,9 @@ use HotDesign\SimpleCatalogBundle\Entity\BaseEntity;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
+
+use ConfigClasses\MyConfig;
+
 class LoadItems extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
@@ -20,6 +23,9 @@ class LoadItems extends AbstractFixture implements OrderedFixtureInterface
     }
 
     public function load(ObjectManager $manager) {
+        //For not loading default fixtures
+        if (!MyConfig::$default_fixtures)
+            return;
 
         $category0 = $this->getReference('category0');
         $category1 = $this->getReference('category1');
