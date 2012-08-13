@@ -238,6 +238,24 @@ class BaseEntityController extends Controller {
                 throw $this->createNotFoundException('Unable to find BaseEntity entity.');
             }
 
+            //Parte que elimina las extensiones 
+
+            $class_extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
+
+            $extends = array();
+
+            //Recuperamos toda la información de las clases a las cuales extiende.
+            foreach ($class_extends as $extend) {
+                $e = array();
+                $e['class'] = $extend['class'];
+                $e['bundle_name'] = $extend['bundle_name'];
+                $e['object'] = $em->getRepository(
+                                $extend['bundle_name'] . ':' . $extend['class'])
+                        ->findOneBy(array('base_entity' => $entity->getId())
+                );
+                $em->remove($e['object']);
+            }
+
             $em->remove($entity);
             $em->flush();
             $this->container->get('session')->setFlash('alert-success', 'El item se ha eliminado con éxito.');
